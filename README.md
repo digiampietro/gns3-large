@@ -14,7 +14,8 @@ On image startup a new user is created with same username and user id of current
 
 ### Usage
 
-To start the image use the `myrun.sh` script, you will get a standard linux prompt, launch gns3 issuing the `gns3` command, you will have access to your home directory. The `myrun.sh` is avilable on my GitHub repository for [gns3-large](https://github.com/digiampietro/gns3-large) :
+To start the image use the `myrun.sh` script, you will get a standard linux prompt, launch gns3 issuing the `gns3` command, you will have access to your home directory. The `myrun.sh` is avilable on my GitHub repository for [gns3-large](https://github.com/digiampietro/gns3-large):
+
 ```
 #!/bin/sh
 sudo docker run -h gns3-large \
@@ -29,6 +30,7 @@ sudo docker run -h gns3-large \
                 -e GSHELL=$SHELL         \
                 -it digiampietro/gns3-large
 ```
+
 * `-h gns3-large` gives the hostname to the docker image
 * `-v /tmp/.X11-unix:/tmp/.X11-unix` is needed to display the application
 * `-v $HOME:$HOME` mount your home directory inside the docker image (the `$HOME` evniroment variable must be correctly set) 
