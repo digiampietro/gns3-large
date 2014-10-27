@@ -1,4 +1,4 @@
-# GNS3 docker image with VPCS, IOU support, Wireshark
+# GNS3 1.1 docker image with VPCS, IOU, Wireshark
 
 ### News
 
