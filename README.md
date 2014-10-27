@@ -1,8 +1,8 @@
-# GNS3 1.1 docker image with VPCS, IOU, Wireshark
+# GNS3 1.1 docker image with VPCS, IOU, QEMU, Wireshark
 
 ### News
 
-This is version 0.50, first public version.
+2014-10-27 Added QEMU emulator
 
 ### Description
 
@@ -53,7 +53,7 @@ To complete the setup of GNS3, launch the application `gns3` at the linux prompt
 ## License
 (The MIT License)
 
-Copyright (c) 2014 Valerio Di Giampietro (http://digiampietro.com)
+Copyright (c) 2014 Valerio Di Giampietro [digiampietro.com](http://digiampietro.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

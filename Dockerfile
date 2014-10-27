@@ -70,6 +70,12 @@ RUN apt-get update
 RUN apt-get -y install libssl-dev:i386
 #
 # ---------------------------------------------------------------------------
+# install QEMU
+#
+RUN apt-get -y install qemu
+#
+#
+# ---------------------------------------------------------------------------
 # these links are needed to run IOU
 #
 RUN ln -s /usr/lib/i386-linux-gnu/libcrypto.so /usr/lib/i386-linux-gnu/libcrypto.so.4
