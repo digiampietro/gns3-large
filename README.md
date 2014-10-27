@@ -1,4 +1,4 @@
-# GNS3 1.1 docker image with VPCS, IOU, QEMU, Wireshark
+# GNS3 1.1 docker image with VPCS, IOU, QEMU and Wireshark
 
 ### News
 
@@ -6,9 +6,9 @@
 
 ### Description
 
-This image is based on Ubuntu 14.04 and includes GNS3, VPCS, IOU Support with no additional Virtual Machine required, (IOU images are not include for legal reasons), Wireshark.
+This image is based on Ubuntu 14.04 and includes GNS3, VPCS, IOU Support, QEMU and Wireshark. For IOU emulation no additional Virtual Machine is required.
 
-Virtual Box and QEMU are not included. They will be included in future versions.
+VirtualBox is not included, there are some issues that I was not able to solve to run VirtualBox inside a Docker container.
 
 On image startup a new user is created with same username and user id of current user with the purpose of sharing the same home directory that the user has on the Linux machine.
 
