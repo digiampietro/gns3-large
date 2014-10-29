@@ -62,6 +62,7 @@ To complete the setup of GNS3, launch the application `gns3` at the linux prompt
 To connect to the physical world and to the internet, a tap0 device, owned by the current user, is created. Because the `gns3` is not running as root, the only way to connect to external world is using the *cloud symbol* and the tap0 device.
 When using the cloud symbol click on *Configure*, select the *NIO TAP* tab, write *tap0* in the field *TAP interface*, click on *Add* and then on *Apply* and *OK*.
 The tap0, virtual ethernet interface, by default (can be change editing the `myrun.sh` file):
+
 * has ip address 192.168.100.1 and netmask 255.255.255.0 can be change editing the `myrun.sh` file);
 * routing and NAT has been configured on the docker container (can be changed);
 * the router interface connected to the cloud symbol must have an ip address on the same subnet (for example 192.168.100.2)
