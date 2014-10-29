@@ -74,11 +74,17 @@ RUN apt-get -y install libssl-dev:i386
 #
 RUN apt-get -y install qemu
 #
+# ---------------------------------------------------------------------------
+# install uml-utilities e iptables to be able to  use tap0 device
+# and NAT
+#
+RUN apt-get -y install uml-utilities iptables
 #
 # ---------------------------------------------------------------------------
 # these links are needed to run IOU
 #
 RUN ln -s /usr/lib/i386-linux-gnu/libcrypto.so /usr/lib/i386-linux-gnu/libcrypto.so.4
+#
 #
 # prepare startup files /src/misc
 #

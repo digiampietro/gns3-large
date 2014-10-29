@@ -1,6 +1,12 @@
 #!/bin/sh
+#
+# add current user and user's primary group
+#
 groupadd -g $GGID $GGROUP
 useradd -u $GUID -s $GSHELL -c $GUSERNAME -g $GGID -M $GUSERNAME -d $GHOME
+#
+# generate IOU License
+#
 if [ -e $GHOME/gns3-misc/keygen.py ]
 then 
     cp $GHOME/gns3-misc/keygen.py /src/misc/
@@ -11,7 +17,31 @@ else
     echo "please put keygen.py in"
     echo "$GHOME/gns3-misc/keygen.py"
 fi
+#
+# create the tap device owned by current user
+# assign it an IP address, enable IP routing and NAT
+#
+echo "-------------------------------------------------------------------"
+echo "tap0 has address 192.168.100.1/24"
+echo "if yuou use the cloud symbol to connect to the physical network"
+echo "use an address on the same subnet, and, on the cloud symbol,"
+echo "select the  \"NIO TAP\" tab and add the \"tap0\" device"
+echo "-------------------------------------------------------------------"
+tunctl -u $GUSERNAME
+ifconfig tap0 $GTAPIP netmask $GTAPMASK up
+echo 1 > /proc/sys/net/ipv4/ip_forward
+if [ $GTAPNATENABLE = "1" ]
+then
+    echo "--- Enabling NAT on incoming ip on tap0 device"
+    iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    iptables -A FORWARD -i tap0 -j ACCEPT
+    iptables -A INPUT -i tap0 -j ACCEPT
+fi
+#
+# become the current user a start a shell
 su -l $GUSERNAME
+#
+# another root shell
 /bin/bash
 
 
