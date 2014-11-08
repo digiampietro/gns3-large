@@ -89,7 +89,24 @@ RUN ln -s /usr/lib/i386-linux-gnu/libcrypto.so /usr/lib/i386-linux-gnu/libcrypto
 # prepare startup files /src/misc
 #
 RUN mkdir /src/misc
+#
+# install gnome connection manager
+#
+RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
+RUN apt-get -y install expect python-vte python-glade2
+RUN mkdir -p /usr/share/desktop-directories
+RUN cd /src/misc; dpkg -i gnome-connection-manager_1.1.0_all.deb
+RUN (while true;do echo;done) | perl -MCPAN -e 'install JSON::Tiny'
+RUN (while true;do echo;done) | perl -MCPAN -e 'install File::Slurp'
+#RUN cd /usr/local/bin; ln -s /usr/share/gnome-connection-manager/* .
+ADD gcmconf /usr/local/bin/gcmconf
 ADD startup.sh /src/misc/startup.sh
 ADD iourc.sample /src/misc/iourc.txt
+ADD gcm /usr/local/bin/gcm
+# Set the locale
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
 RUN chmod a+x /src/misc/startup.sh
 ENTRYPOINT cd /src/misc ; ./startup.sh

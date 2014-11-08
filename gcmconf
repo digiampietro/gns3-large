@@ -1,0 +1,134 @@
+#!/usr/bin/perl
+$debug = 0;
+use JSON::Tiny;
+use File::Slurp;
+use Data::Dumper;
+use File::Basename;
+
+$hostskel = "[host _HOSTNUM_]
+group = _PRJNAME_
+name = _HOSTNAME_
+description = _HOSTDESCR_
+host = 127.0.0.1
+user = 
+pass = TaJ+mUvyoTJVZpSYZQTt1g+ygvGZTJfgN6VufubCkK4=
+private_key = 
+port = _PORTNUM_
+tunnel = 
+type = telnet
+commands = 
+keepalive = 0
+font-color = 
+back-color = 
+x11 = False
+agent = False
+compression = False
+compression-level = 6
+extra_params = 
+log = False
+backspace-key = 0
+delete-key = 0";
+
+
+$gcmconf = "$ENV{'HOME'}/.gcm/gcm.conf";
+$prjdir  = "$ENV{'HOME'}/GNS3/projects";
+print STDERR "prjdir: $prjdir\n" if $debug;
+@prjfiles= glob("$prjdir/*");
+
+for ($i=0; $i<=$#prjfiles; $i++) {
+    $prjs[$i]=basename($prjfiles[$i]);
+    $prjname{basename($prjfiles[$i])}=$i;
+}
+$,="\n";
+print STDERR @prjfiles,"\n" if ($debug);
+print STDERR @prjs,"\n"     if ($debug);
+
+# process the gcm.conf file
+print STDERR "opening: $gcmconf\n";
+open (GCM,"$gcmconf") or die "Error opening $gcmconf file\n";
+my $section=-1;
+while (<GCM>) {
+    if (/^\[([^\]]+)]$/) {
+	$secname=$1;
+	$section++;
+	print STDERR "section $section: $secname $_" if ($debug);
+	$sec[$section] .= $_;
+	$grpname[$section]="---undefined---";
+    } else {
+	$sec[$section] .= $_;
+	if (/^group \= (.*)$/) {$grpname[$section]=$1;}
+    }
+}
+close GCM;
+
+
+# $VAR1 = {
+#           'name' => 'unsaved',
+#           'resources_type' => 'local',
+#           'topology' => {
+#                         'nodes' => [
+# 			    {
+#                                      'properties' 
+
+
+# ----------------------------------------------------------
+# process project files
+$gcmhosts="";
+$hostnum=1;
+for ($i=0; $i<=$#prjfiles; $i++) {
+    undef $json;
+    undef $h->{'topology'}->{'nodes'};
+    undef $h;
+    undef $text;
+    undef $n;
+    $gns3file="$prjfiles[$i]/$prjs[$i].gns3";
+    unless (-e $gns3file) {next;}
+    if ($prjs[$i]=~/untitled/) {next;}
+    print STDERR "---- processing $gns3file\n";
+    $text = read_file($gns3file) or die "Error reading file $gns3file";
+    $json = JSON::Tiny->new;
+    $h    = $json->decode($text);
+    $profilelist="Mrxvt.initProfileList:          ";
+    for $k (sort keys $h->{'topology'}->{'nodes'}) {
+	print STDERR "k: $k\n" if $debug;
+	next unless ($h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'});
+	$n=$k;
+	$profilelist .="," unless ($n == 0);
+	$profilelist .= $n;
+	$s=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'};
+	$p=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'console'};
+	$tmpskel=$hostskel;
+	$tmpskel=~s/_HOSTNUM_/$hostnum/;
+	$tmpskel=~s/_PRJNAME_/$prjs[$i]/;
+	$tmpskel=~s/_HOSTNAME_/$i-$s/;
+	$tmpskel=~s/_HOSTDESCR_/$i-$s/;
+	$tmpskel=~s/_PORTNUM_/$p/;
+	$gcmhosts.=$tmpskel ."\n\n";
+	$hostnum++;
+    }
+    
+}
+
+# print the $gcmconf file
+#
+print "Writing the new $gcmconf file\n";
+open (GCM,">$gcmconf") or die "Error opening for write $gcmconf\n";
+
+for ($i=0; $i < $#sec; $i++) {
+    next if ($grpname[$i] ne '---undefined---');
+    print GCM $sec[$i];
+}
+
+print GCM $gcmhosts;
+
+for ($i=1; $i < $#sec; $i++) {
+    next if ($prjname{$grpname[$i]});
+    next if ($grpname eq '---undefined---');
+    if ($sec[$i] =~ /\[host \d+\]/sm) {
+	$sec[$i] =~ s/\[host \d+\]/\[host $hostnum\]/sm;
+	$hostnum++;
+    }
+    print GCM $sec[$i];
+}
+
+print GCM $sec[$#sec];
