@@ -98,10 +98,22 @@ To connect to the physical world and to the internet, a tap0 device, owned by th
 When using the cloud symbol click on **Configure**, select the **NIO TAP** tab, write **tap0** in the field **TAP interface**, click on **Add** and then on **Apply** and **OK**.
 The tap0, virtual ethernet interface, by default (can be change editing the `myrun.sh` file):
 
-* has ip address 10.123.1.1 and netmask 255.255.255.0 can be change editing the `myrun.sh` file);
+* has ip address 10.123.1.1 and netmask 255.255.255.0, can be change editing the `myrun.sh` file;
 * the router interface connected to the cloud symbol must have an ip address on the same subnet (for example 10.123.1.2/24)
-* assuming that the emulated network will use the network 10.123.0.0/24, routing, by default, has been configured on the docker container (can be changed and enable NAT instead);
+* assuming that the emulated network will use the network 10.123.0.0/16, routing, by default, has been configured on the docker container (can be changed and enable NAT instead);
 * a route to this network must be added on the host (unless NAT is used), can be done using the **hostroute2gns3** script included in this git repository;
+
+## Author
+I am happy to be contacted about this project, my contact details are:
+
+|Item             |Content                                          |
+|-----------------|-------------------------------------------------|
+|Author's name    |Valerio Di Giampietro                            |
+|Email            |v@ler.io (yes it's a valid email address!)       |
+|Personal web site|http://va.ler.io (aka http://digiampietro.com)   |
+|LinkedIn         |http://it.linkedin.com/in/digiampietro           |
+|Twitter          |http://twitter.com/valerio                       |
+|Facebook         |http://facebook.com/digiampietro                 |
 
 ## License
 (The MIT License)
