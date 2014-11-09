@@ -19,7 +19,8 @@ On image startup a new user is created with same username and user id of current
 
 ### Usage
 
-To start the image use the `myrun.sh` script, you will get a standard linux prompt, launch gns3 issuing the `gns3` command, you will have access to your home directory. The `myrun.sh` is avilable on my GitHub repository for [gns3-large](https://github.com/digiampietro/gns3-large):
+To start the image use the `myrun.sh` script, you will get a standard linux prompt, launch gns3 issuing the `gns3` command, you will have access to your home directory. For unknown reason, to me sometimes happen that the gns3 windows has black color covering readible areas, in that case exit and relauch gns3.
+The `myrun.sh` is avilable on my GitHub repository for [gns3-large](https://github.com/digiampietro/gns3-large):
 
 ```
 #!/bin/sh
