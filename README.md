@@ -84,7 +84,7 @@ In the docker image two nice tools are included to allow easier access to each d
 
 * __gcmconf__ a simple perl script that reads the GNS3 projects from your home directory and create or update the Gnome Connection Manager configuration file to include all devices in your emulated network as showin in the image below
 
-![alt Gnome Connection Manage screenshot](https://github.com/digiampietro/gns3-large/images/gcm.png)
+![alt Gnome Connection Manage screenshot](https://raw.githubusercontent.com/digiampietro/gns3-large/master/images/gcm.png)
 
 To complete the setup of GNS3, launch the application `gns3` at the linux prompt, go to **Edit -> Preferences ...**:
 
