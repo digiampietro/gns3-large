@@ -7,6 +7,7 @@ export GGROUP=`id -g -n`           # current user's primary group name
 export GGID=`id -g`                # current user's primary group id
 export GHOME=$HOME                 # current user's home directory
 export GSHELL=$SHELL               # current user's shell
+export GRUNXTERM=1                 # start lxtermina, useful in windows
 #
 # to connect the emulated network to the external world
 # we use a tap0 interface inside the docker container
@@ -36,6 +37,7 @@ sudo docker run -h gns3-large                     \
                 -e GNS3NETWORK=$GNS3NETWORK       \
                 -e GNS3NETMASK=$GNS3NETMASK       \
                 -e GROUTE2GNS3=$GROUTE2GNS3       \
+                -e GRUNXTERM=$GRUNXTERM           \
                 --privileged                      \
                 -it digiampietro/gns3-large
 

@@ -2,6 +2,8 @@
 
 ### News
 
+2014-11-15 Added support to be executed in Windows using [boot2docker](http://boot2docker.io/) and an X-Windows server like [Xming](http://www.straightrunning.com/XmingNotes/), [Cigwin/X](http://x.cygwin.com/) or similar software
+
 2014-11-09 Added Gnome Connection Manager, routing to GNS3 emulated network, minor fixes
 
 2014-10-27 Added QEMU emulator

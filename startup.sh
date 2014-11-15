@@ -43,12 +43,18 @@ if [ "$GROUTE2GNS3" = "1" ]
 then 
     route add -net $GNS3NETWORK netmask $GNS3NETMASK gw $GTAPIP
 fi
-#
-# become the current user and start a shell
-su -l $GUSERNAME
-#
-# another root shell
-/bin/bash
+if [ "$GRUNXTERM" = "1" ]
+then
+    # become the current user and start a shell
+    su -l -c lxterminal $GUSERNAME
+    # another root shel
+    lxterminal
+else
+    # become the current user and start a shell
+    su -l $GUSERNAME
+    # another root shell
+    /bin/bash
+fi
 
 
 
