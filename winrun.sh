@@ -19,6 +19,7 @@ export GTAPNATENABLE=1             # enable NAT on tap0 outgoing traffic (if 1 G
 export GNS3NETWORK=10.123.0.0      # IP network used inside the GNS3 emulated network
 export GNS3NETMASK=255.255.0.0     # IP netmask used inside the GNS3 emulated network
 export GROUTE2GNS3=0               # enable routing from the container eth0 to the emulated network
+export GRUNXTERM=1                 # start lxtermina, useful in windows
 
 # find main IP of Windows PC
 PCIP=`ping $COMPUTERNAME -n 1 | grep $COMPUTERNAME | grep '\[' | sed 's/^.*\[//' | sed 's/\].*//'`
@@ -30,7 +31,8 @@ echo "GHOME:        $GHOME"
 echo "computername: $COMPUTERNAME"
 echo "IP:           $PCIP"
 
-./boot2docker.exe ssh "docker run                              \
+/c/Program\ Files/Boot2Docker\ for\ Windows/boot2docker.exe    \
+                  ssh "docker run                              \
                               -h gns3-large                    \
                               -v $GHOME:/home/gns3user         \
                               -e DISPLAY=$PCIP:0               \
@@ -46,5 +48,6 @@ echo "IP:           $PCIP"
                               -e GNS3NETWORK=$GNS3NETWORK      \
                               -e GNS3NETMASK=$GNS3NETMASK      \
                               -e GROUTE2GNS3=$GROUTE2GNS3      \
+                              -e GRUNXTERM=$GRUNXTERM          \
                               --privileged                     \
                               -it digiampietro/gns3-large"

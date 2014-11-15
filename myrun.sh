@@ -7,7 +7,7 @@ export GGROUP=`id -g -n`           # current user's primary group name
 export GGID=`id -g`                # current user's primary group id
 export GHOME=$HOME                 # current user's home directory
 export GSHELL=$SHELL               # current user's shell
-export GRUNXTERM=1                 # start lxtermina, useful in windows
+export GRUNXTERM=0                # start lxtermina, useful in windows
 #
 # to connect the emulated network to the external world
 # we use a tap0 interface inside the docker container

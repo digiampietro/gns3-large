@@ -89,22 +89,24 @@ for ($i=0; $i<=$#prjfiles; $i++) {
     $json = JSON::Tiny->new;
     $h    = $json->decode($text);
     $profilelist="Mrxvt.initProfileList:          ";
-    for $k (sort keys $h->{'topology'}->{'nodes'}) {
-	print STDERR "k: $k\n" if $debug;
-	next unless ($h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'});
-	$n=$k;
-	$profilelist .="," unless ($n == 0);
-	$profilelist .= $n;
-	$s=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'};
-	$p=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'console'};
-	$tmpskel=$hostskel;
-	$tmpskel=~s/_HOSTNUM_/$hostnum/;
-	$tmpskel=~s/_PRJNAME_/$prjs[$i]/;
-	$tmpskel=~s/_HOSTNAME_/$i-$s/;
-	$tmpskel=~s/_HOSTDESCR_/$i-$s/;
-	$tmpskel=~s/_PORTNUM_/$p/;
-	$gcmhosts.=$tmpskel ."\n\n";
-	$hostnum++;
+    if ( $h->{'topology'}->{'nodes'} ) {
+	for $k (sort keys $h->{'topology'}->{'nodes'}) {
+	    print STDERR "k: $k\n" if $debug;
+	    next unless ($h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'});
+	    $n=$k;
+	    $profilelist .="," unless ($n == 0);
+	    $profilelist .= $n;
+	    $s=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'};
+	    $p=$h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'console'};
+	    $tmpskel=$hostskel;
+	    $tmpskel=~s/_HOSTNUM_/$hostnum/;
+	    $tmpskel=~s/_PRJNAME_/$prjs[$i]/;
+	    $tmpskel=~s/_HOSTNAME_/$i-$s/;
+	    $tmpskel=~s/_HOSTDESCR_/$i-$s/;
+	    $tmpskel=~s/_PORTNUM_/$p/;
+	    $gcmhosts.=$tmpskel ."\n\n";
+	    $hostnum++;
+	}
     }
     
 }

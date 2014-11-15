@@ -1,5 +1,5 @@
-# Version: 0.5
-FROM ubuntu
+# Version: 0.6
+FROM ubuntu:14.04
 MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
 #
 # ------------------------------------------------------------------
@@ -31,13 +31,14 @@ RUN apt-get -y install wireshark
 #
 RUN mkdir /src
 RUN cd /src; git clone https://github.com/GNS3/dynamips.git
+RUN cd /src/dynamips ; git checkout v0.2.14
 RUN mkdir /src/dynamips/build
-RUN cd /src/dynamips/build ; cmake .. ; make ; make install
+RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; python3 setup.py install
-RUN cd /src/gns3-gui ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.1 ; python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.1 ; python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version
