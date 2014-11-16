@@ -93,6 +93,8 @@ for ($i=0; $i<=$#prjfiles; $i++) {
 	for $k (sort keys $h->{'topology'}->{'nodes'}) {
 	    print STDERR "k: $k\n" if $debug;
 	    next unless ($h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'});
+	    next unless ($h->{'topology'}->{'nodes'}[$k]->{'properties'}->{'name'} !~ /Cloud /);
+
 	    $n=$k;
 	    $profilelist .="," unless ($n == 0);
 	    $profilelist .= $n;
@@ -101,8 +103,8 @@ for ($i=0; $i<=$#prjfiles; $i++) {
 	    $tmpskel=$hostskel;
 	    $tmpskel=~s/_HOSTNUM_/$hostnum/;
 	    $tmpskel=~s/_PRJNAME_/$prjs[$i]/;
-	    $tmpskel=~s/_HOSTNAME_/$i-$s/;
-	    $tmpskel=~s/_HOSTDESCR_/$i-$s/;
+	    $tmpskel=~s/_HOSTNAME_/$s/;
+	    $tmpskel=~s/_HOSTDESCR_/$s/;
 	    $tmpskel=~s/_PORTNUM_/$p/;
 	    $gcmhosts.=$tmpskel ."\n\n";
 	    $hostnum++;
