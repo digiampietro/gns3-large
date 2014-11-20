@@ -29,6 +29,7 @@ echo "if yuou use the cloud symbol to connect to the physical network"
 echo "use an address on the same subnet, and, on the cloud symbol,"
 echo "select the  \"NIO TAP\" tab and add the \"tap0\" device"
 echo "-------------------------------------------------------------------"
+chmod 0666 /dev/net/tun
 tunctl -u $GUSERNAME
 ifconfig tap0 $GTAPIP netmask $GTAPMASK up
 echo 1 > /proc/sys/net/ipv4/ip_forward

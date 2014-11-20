@@ -1,6 +1,10 @@
-# Version: 0.6
+# Version: 0.7
 FROM ubuntu:14.04
 MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
+#
+# increase the version to force recompilation of everything
+#
+ENV GNS3LARGEVERSION 0.7
 #
 # ------------------------------------------------------------------
 # environment variables to avoid that dpkg-reconfigure 
@@ -37,8 +41,8 @@ RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; git checkout v1.1 ; python3 setup.py install
-RUN cd /src/gns3-gui ; git checkout v1.1 ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.2 ; python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.2 ; python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version
