@@ -33,6 +33,7 @@ echo "IP:           $PCIP"
 
 /c/Program\ Files/Boot2Docker\ for\ Windows/boot2docker.exe    \
                   ssh "docker run                              \
+                              --rm                             \
                               -h gns3-large                    \
                               -v $GHOME:/home/gns3user         \
                               -e DISPLAY=$PCIP:0               \

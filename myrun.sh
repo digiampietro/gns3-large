@@ -7,7 +7,7 @@ export GGROUP=`id -g -n`           # current user's primary group name
 export GGID=`id -g`                # current user's primary group id
 export GHOME=$HOME                 # current user's home directory
 export GSHELL=$SHELL               # current user's shell
-export GRUNXTERM=0                # start lxtermina, useful in windows
+export GRUNXTERM=0                 # start lxtermina, useful in windows
 #
 # to connect the emulated network to the external world
 # we use a tap0 interface inside the docker container
@@ -22,6 +22,7 @@ export GNS3NETMASK=255.255.0.0     # IP netmask used inside the GNS3 emulated ne
 export GROUTE2GNS3=1               # enable routing from the container eth0 to the emulated network
 
 sudo docker run -h gns3-large                     \
+                --rm                              \
                 -v /tmp/.X11-unix:/tmp/.X11-unix  \
                 -v $HOME:$HOME                    \
                 -e DISPLAY=$GDISPLAY              \
@@ -29,7 +30,7 @@ sudo docker run -h gns3-large                     \
                 -e GUID=$GUID                     \
                 -e GGROUP=$GGROUP                 \
                 -e GGID=$GGID                     \
-                -e GHOME=$HOME                    \
+                -e GHOME=$GHOME                   \
                 -e GSHELL=$SHELL                  \
                 -e GTAPIP=$GTAPIP                 \
                 -e GTAPMASK=$GTAPMASK             \

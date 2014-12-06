@@ -1,10 +1,10 @@
-# Version: 0.7
+# Version: 0.7.1
 FROM ubuntu:14.04
 MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
 #
 # increase the version to force recompilation of everything
 #
-ENV GNS3LARGEVERSION 0.7
+ENV GNS3LARGEVERSION 0.7.1
 #
 # ------------------------------------------------------------------
 # environment variables to avoid that dpkg-reconfigure 
@@ -23,12 +23,12 @@ RUN apt-get -y install python3-setuptools python3-pyqt4 python3-ws4py
 RUN apt-get -y install python3-netifaces python3-zmq python3-tornado python3-dev
 RUN apt-get -y install bison flex
 # 
-# for iou install 32 bit libraries, python is neede to generate the license file
+# for iou install 32 bit libraries, python is needed to generate the license file
 #
 RUN apt-get -y install lib32z1 lib32ncurses5 lib32bz2-1.0
 RUN apt-get -y install lxterminal telnet
 RUN apt-get -y install python
-RUN apt-get -y install wireshark
+RUN apt-get -y install wireshark cpulimit
 #
 # -----------------------------------------------------------------
 # compile and install dynamips, gns3-server, gns3-gui
@@ -41,8 +41,8 @@ RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; git checkout v1.2 ; python3 setup.py install
-RUN cd /src/gns3-gui ; git checkout v1.2 ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.2.1 ; python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.2.1 ; python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version
@@ -97,7 +97,8 @@ RUN mkdir /src/misc
 #
 # install gnome connection manager
 #
-RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
+#RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
+RUN cd /src/misc; wget http://va.ler.io/myfiles/deb/gnome-connection-manager_1.1.0_all.deb
 RUN apt-get -y install expect python-vte python-glade2
 RUN mkdir -p /usr/share/desktop-directories
 RUN cd /src/misc; dpkg -i gnome-connection-manager_1.1.0_all.deb

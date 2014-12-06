@@ -2,6 +2,8 @@
 
 ### News
 
+2014-12-06 Updated GNS3 to version 1.2.1, minor fixes
+
 2014-11-20 Updated GNS3 to version 1.2
 
 2014-11-15 Added support to be executed in Windows using [boot2docker](http://boot2docker.io/) and an X-Windows server like [Xming](http://www.straightrunning.com/XmingNotes/), [Cigwin/X](http://x.cygwin.com/) or similar software
