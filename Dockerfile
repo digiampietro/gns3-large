@@ -4,7 +4,7 @@ MAINTAINER Valerio Di Giampietro "valerio@digiampietro.com"
 #
 # increase the version to force recompilation of everything
 #
-ENV GNS3LARGEVERSION 0.7.1
+ENV GNS3LARGEVERSION 0.7.2
 #
 # ------------------------------------------------------------------
 # environment variables to avoid that dpkg-reconfigure 
@@ -41,8 +41,8 @@ RUN cd /src/dynamips/build ;  cmake .. ; make ; make install
 #
 RUN cd /src; git clone https://github.com/GNS3/gns3-gui.git
 RUN cd /src; git clone https://github.com/GNS3/gns3-server.git
-RUN cd /src/gns3-server ; git checkout v1.2.1 ; python3 setup.py install
-RUN cd /src/gns3-gui ; git checkout v1.2.1 ; python3 setup.py install
+RUN cd /src/gns3-server ; git checkout v1.2.3 ; python3 setup.py install
+RUN cd /src/gns3-gui ; git checkout v1.2.3 ; python3 setup.py install
 #
 #-----------------------------------------------------------------------
 # compile and install vpcs, 64 bit version
@@ -97,8 +97,8 @@ RUN mkdir /src/misc
 #
 # install gnome connection manager
 #
-#RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
-RUN cd /src/misc; wget http://va.ler.io/myfiles/deb/gnome-connection-manager_1.1.0_all.deb
+RUN cd /src/misc; wget http://kuthulu.com/gcm/gnome-connection-manager_1.1.0_all.deb
+#RUN cd /src/misc; wget http://va.ler.io/myfiles/deb/gnome-connection-manager_1.1.0_all.deb
 RUN apt-get -y install expect python-vte python-glade2
 RUN mkdir -p /usr/share/desktop-directories
 RUN cd /src/misc; dpkg -i gnome-connection-manager_1.1.0_all.deb

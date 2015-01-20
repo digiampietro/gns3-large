@@ -1,6 +1,8 @@
-# GNS3 1.2 docker image with VPCS, IOU, QEMU and Wireshark
+# GNS3 1.2.3 docker image with VPCS, IOU, QEMU and Wireshark
 
 ### News
+
+2015-01-20 Updated GNS3 to version 1.2.3
 
 2014-12-06 Updated GNS3 to version 1.2.1, minor fixes
 
