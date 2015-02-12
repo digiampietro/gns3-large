@@ -30,6 +30,7 @@ echo "use an address on the same subnet, and, on the cloud symbol,"
 echo "select the  \"NIO TAP\" tab and add the \"tap0\" device"
 echo "-------------------------------------------------------------------"
 chmod 0666 /dev/net/tun
+chmod +s /usr/local/bin/iouyap
 tunctl -u $GUSERNAME
 ifconfig tap0 $GTAPIP netmask $GTAPMASK up
 echo 1 > /proc/sys/net/ipv4/ip_forward
